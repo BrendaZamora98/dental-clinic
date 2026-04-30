@@ -1,34 +1,31 @@
 package logic;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Patient extends Person{
     
-    private int patientId;
+    //private int patientId;
     private boolean hasInsurance;
     private String bloodType;
+    @OneToOne
     private Guardian aGuardian;
+    @OneToMany(mappedBy="pati")       
     private List<Appointment> appointmentsList;
 
     public Patient() {
     }
 
-    public Patient(int patientId, boolean hasInsurance, String bloodType, Guardian aGuardian, List<Appointment> appointmentsList, String id_number, String firstName, String lastName, String phoneNumber, String address, Date birthDate) {
+    public Patient(boolean hasInsurance, String bloodType, Guardian aGuardian, List<Appointment> appointmentsList, String id_number, String firstName, String lastName, String phoneNumber, String address, Date birthDate) {
         super(id_number, firstName, lastName, phoneNumber, address, birthDate);
-        this.patientId = patientId;
         this.hasInsurance = hasInsurance;
         this.bloodType = bloodType;
         this.aGuardian = aGuardian;
         this.appointmentsList = appointmentsList;
-    }
-
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
     }
 
     public boolean isHasInsurance() {
