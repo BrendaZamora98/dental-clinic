@@ -6,18 +6,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
-public class Appointment {
+public class Appointment implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int appointmentId;
-    @Temporal(TemporalType.DATE)
-    private Date appointmentDate;
+    private LocalDate appointmentDate;
     private String appointmentTime;
     private String reason;
     @ManyToOne
@@ -29,7 +27,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(int appointmentId, Date appointmentDate, String appointmentTime, String reason) {
+    public Appointment(int appointmentId, LocalDate appointmentDate, String appointmentTime, String reason) {
         this.appointmentId = appointmentId;
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
@@ -44,11 +42,11 @@ public class Appointment {
         this.appointmentId = appointmentId;
     }
 
-    public Date getAppointmentDate() {
+    public LocalDate getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
+    public void setAppointmentDate(LocalDate appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 

@@ -6,13 +6,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public class Person {
+public class Person implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,19 +21,27 @@ public class Person {
     private String lastName;
     private String phoneNumber;
     private String address;
-    @Temporal(TemporalType.DATE)
-    private Date birthDate;
+    private LocalDate birthDate;
 
     public Person() {
     }
 
-    public Person(String id_number, String firstName, String lastName, String phoneNumber, String address, Date birthDate) {
+    public Person(int personId, String id_number, String firstName, String lastName, String phoneNumber, String address, LocalDate birthDate) {
+        this.personId = personId;
         this.id_number = id_number;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.birthDate = birthDate;
+    }
+
+    public int getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public String getId_number() {
@@ -77,11 +84,11 @@ public class Person {
         this.address = address;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
     

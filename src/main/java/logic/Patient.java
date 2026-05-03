@@ -3,11 +3,12 @@ package logic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Patient extends Person{
+public class Patient extends Person implements Serializable{
     
     //private int patientId;
     private boolean hasInsurance;
@@ -20,8 +21,8 @@ public class Patient extends Person{
     public Patient() {
     }
 
-    public Patient(boolean hasInsurance, String bloodType, Guardian aGuardian, List<Appointment> appointmentsList, String id_number, String firstName, String lastName, String phoneNumber, String address, Date birthDate) {
-        super(id_number, firstName, lastName, phoneNumber, address, birthDate);
+    public Patient(boolean hasInsurance, String bloodType, Guardian aGuardian, List<Appointment> appointmentsList, int personId, String id_number, String firstName, String lastName, String phoneNumber, String address, LocalDate birthDate) {
+        super(personId, id_number, firstName, lastName, phoneNumber, address, birthDate);
         this.hasInsurance = hasInsurance;
         this.bloodType = bloodType;
         this.aGuardian = aGuardian;
@@ -59,7 +60,5 @@ public class Patient extends Person{
     public void setAppointmentsList(List<Appointment> appointmentsList) {
         this.appointmentsList = appointmentsList;
     }
-
-    
     
 }
